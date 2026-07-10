@@ -14,6 +14,17 @@ config/name="atom keys"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*uid://cwgisxrlakmuh"
+Registry="*uid://bw4odpmcej1ke"
+SceneChanger="*uid://cxakioj8t26dm"
+Util="*uid://d2rtvpsjo087t"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
