@@ -1,3 +1,29 @@
 [gd_scene format=3 uid="uid://bc4qww7g4fufy"]
 
+[ext_resource type="Script" uid="uid://d17iyd044sqs3" path="res://scenes/main/main.gd" id="1_hyk8p"]
+[ext_resource type="PackedScene" uid="uid://gx8cpvdf0wpu" path="res://scenes/objects/atom.tscn" id="2_iuonh"]
+
 [node name="main" type="Node2D" unique_id=2121976591]
+script = ExtResource("1_hyk8p")
+
+[node name="Control" type="Control" parent="." unique_id=1823130753]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 768.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1470702390]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.03137255, 0.08627451, 1)
+
+[node name="atom_pivot" type="Node2D" parent="." unique_id=2103493194]
+position = Vector2(416, 320)
+
+[node name="atom_container" type="Node2D" parent="atom_pivot" unique_id=1307724853]
+
+[node name="atom" parent="atom_pivot/atom_container" unique_id=1146771473 instance=ExtResource("2_iuonh")]

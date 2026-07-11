@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://kxgfiqp6p2ci"]
+
+[ext_resource type="Script" uid="uid://gvjt5sx1lb2h" path="res://scenes/objects/spring.gd" id="1_apevs"]
+
+[node name="spring" type="Node2D" unique_id=1487881596]
+script = ExtResource("1_apevs")

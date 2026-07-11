@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://gx8cpvdf0wpu"]
+
+[ext_resource type="Script" uid="uid://c1iynraw436cn" path="res://scenes/objects/atom.gd" id="1_nm7s8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nm7s8"]
+font_size = 32
+
+[node name="atom" type="Node2D" unique_id=1146771473]
+script = ExtResource("1_nm7s8")
+metadata/_custom_type_script = "uid://c1iynraw436cn"
+
+[node name="Label" type="Label" parent="." unique_id=79338602]
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+text = "H"
+label_settings = SubResource("LabelSettings_nm7s8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1527903336]
+closed = true
+width = 6.0
+
+[node name="springs_container" type="Node2D" parent="." unique_id=819131159]
