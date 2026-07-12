@@ -2,15 +2,18 @@ extends Node2D
 
 @onready var atom_pivot: Node2D = $atom_pivot
 @onready var atom_container: Node2D = $atom_pivot/atom_container
+@onready var atoms: Node2D = $atoms
 
-var radius: float = 64.0
-var speed: float = 4.2
-
+var radius: float = 200.0
+var speed: float = 1.0
 var angle: float = 0.0
 
+func _ready() -> void:
+	new_atom()
+
 func _process(delta) -> void:
-	angle += delta
-	atom_container.global_position = atom_pivot.global_position + Vector2(cos(angle), sin(angle))
+	angle += delta * speed
+	atom_container.global_position = atom_pivot.global_position + Vector2(cos(angle), sin(angle)) * radius
 	
 	if not GameManager.game_running: return
 	if Input.is_action_just_pressed("interact"):
@@ -18,3 +21,15 @@ func _process(delta) -> void:
 
 func use_atom() -> void:
 	var current_atom: Atom = atom_container.get_child(0)
+	current_atom.shot = true
+	current_atom.reparent(atoms)
+	
+	current_atom.set_collision_layer_value(1, true)
+	current_atom.set_collision_mask_value(1, true)
+	new_atom()
+
+func new_atom() -> void:
+	var atom: Atom = load(Registry.UID["atom"]).instantiate()
+	atom.atom_center = atom_pivot.global_position
+	atom_container.add_child(atom)
+	

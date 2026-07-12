@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bc4qww7g4fufy"]
 
 [ext_resource type="Script" uid="uid://d17iyd044sqs3" path="res://scenes/main/main.gd" id="1_hyk8p"]
-[ext_resource type="PackedScene" uid="uid://gx8cpvdf0wpu" path="res://scenes/objects/atom.tscn" id="2_iuonh"]
 
 [node name="main" type="Node2D" unique_id=2121976591]
 script = ExtResource("1_hyk8p")
@@ -17,13 +16,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1254902, 0.03137255, 0.08627451, 1)
 
 [node name="atom_pivot" type="Node2D" parent="." unique_id=2103493194]
-position = Vector2(416, 320)
+position = Vector2(384, 320)
 
 [node name="atom_container" type="Node2D" parent="atom_pivot" unique_id=1307724853]
 
-[node name="atom" parent="atom_pivot/atom_container" unique_id=1146771473 instance=ExtResource("2_iuonh")]
+[node name="atoms" type="Node2D" parent="." unique_id=68321666 groups=["atoms"]]
+position = Vector2(384, 320)

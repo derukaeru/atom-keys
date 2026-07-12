@@ -2,14 +2,26 @@
 
 [ext_resource type="Script" uid="uid://c1iynraw436cn" path="res://scenes/objects/atom.gd" id="1_nm7s8"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nm7s8"]
+radius = 32.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_nm7s8"]
 font_size = 32
 
-[node name="atom" type="Node2D" unique_id=1146771473]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ca088"]
+radius = 32.0
+
+[node name="Atom" type="RigidBody2D" unique_id=393094832]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource("1_nm7s8")
 metadata/_custom_type_script = "uid://c1iynraw436cn"
 
-[node name="Label" type="Label" parent="." unique_id=79338602]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=592459364]
+shape = SubResource("CircleShape2D_nm7s8")
+
+[node name="Label" type="Label" parent="." unique_id=1888718420]
 offset_left = -48.0
 offset_top = -48.0
 offset_right = 48.0
@@ -19,8 +31,15 @@ label_settings = SubResource("LabelSettings_nm7s8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Line2D" type="Line2D" parent="." unique_id=1527903336]
+[node name="Line2D" type="Line2D" parent="." unique_id=1754281951]
 closed = true
-width = 6.0
+width = 3.0
 
-[node name="springs_container" type="Node2D" parent="." unique_id=819131159]
+[node name="springs_container" type="Node2D" parent="." unique_id=1718434971]
+
+[node name="detection" type="Area2D" parent="." unique_id=58108267]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection" unique_id=1063553445]
+shape = SubResource("CircleShape2D_ca088")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
