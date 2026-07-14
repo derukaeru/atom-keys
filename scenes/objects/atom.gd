@@ -22,25 +22,23 @@ func _ready() -> void:
 		var a: float = (2 * PI / vertex_num) * i
 		var x: float = c.x + radius * cos(a)
 		var y: float = c.y + radius * sin(a)
-		
+
 		var s: Spring = load(Registry.UID["spring"]).instantiate()
 		springs_container.add_child(s)
-		
+
 		s.initialize(Vector2(x, y), i, c)
 		springs.append(s)
-	
+
 	collision.shape.radius = radius
 
 func _process(_delta) -> void:
 	var pts: Array = []
 	for s in springs:
 		pts.append(s.position)
-		
 	if pts.size() > 0:
 		pts.append(pts[0])
-	
 	line2d.points = pts
-	
+
 	if shot:
 		var to_center: Vector2 = atom_center - global_position
 		if to_center.length() > 6.0:
@@ -51,6 +49,5 @@ func _process(_delta) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Atom:
 		if body.index != index or body.element_name == "neutrino": return
-		
 		if body.shot and shot:
 			body.queue_free()
