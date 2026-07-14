@@ -30,6 +30,7 @@ func _ready() -> void:
 		springs.append(s)
 
 	collision.shape.radius = radius
+	
 
 func _process(_delta) -> void:
 	var pts: Array = []
@@ -45,6 +46,8 @@ func _process(_delta) -> void:
 			linear_velocity = to_center.normalized() * speed
 		else:
 			linear_velocity = Vector2.ZERO
+	else:
+		global_position = get_parent().global_position
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Atom:

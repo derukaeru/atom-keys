@@ -36,7 +36,7 @@ func use_atom() -> void:
 	current_atom.set_collision_layer_value(1, true)
 	current_atom.set_collision_mask_value(1, true)
 
-	get_tree().create_timer(0.2).timeout.connect(new_atom)
+	new_atom()
 
 func new_atom() -> void:
 	var atom: Atom
