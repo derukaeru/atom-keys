@@ -8,13 +8,12 @@ radius = 32.0
 [sub_resource type="LabelSettings" id="LabelSettings_nm7s8"]
 font_size = 32
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ca088"]
-radius = 32.0
-
 [node name="Atom" type="RigidBody2D" unique_id=393094832]
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_nm7s8")
 metadata/_custom_type_script = "uid://c1iynraw436cn"
 
@@ -36,10 +35,5 @@ closed = true
 width = 3.0
 
 [node name="springs_container" type="Node2D" parent="." unique_id=1718434971]
-
-[node name="detection" type="Area2D" parent="." unique_id=58108267]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detection" unique_id=1063553445]
-shape = SubResource("CircleShape2D_ca088")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

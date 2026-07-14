@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://04la61gnsatt"]
+
+[ext_resource type="Script" uid="uid://ddl4tg8lo2qhd" path="res://scenes/objects/neutrino.gd" id="1_yievg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_leqe0"]
+
+[node name="neutrino" type="RigidBody2D" unique_id=24487719]
+gravity_scale = 0.0
+script = ExtResource("1_yievg")
+metadata/_custom_type_script = "uid://c1iynraw436cn"
+
+[node name="Line2D" type="Line2D" parent="." unique_id=2063854402]
+
+[node name="springs_container" type="Node2D" parent="." unique_id=954284618]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1144068112]
+shape = SubResource("CircleShape2D_leqe0")

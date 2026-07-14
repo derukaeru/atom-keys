@@ -2,8 +2,6 @@ class_name Atom extends RigidBody2D
 
 @onready var line2d: Line2D = $Line2D
 @onready var springs_container: Node2D = $springs_container
-@onready var detection: Area2D = $detection
-@onready var detection_collision: CollisionShape2D = $detection/CollisionShape2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 @export var element_name: String
@@ -31,7 +29,6 @@ func _ready() -> void:
 		s.initialize(Vector2(x, y), i, c)
 		springs.append(s)
 	
-	detection_collision.shape.radius = radius
 	collision.shape.radius = radius
 
 func _process(_delta) -> void:
@@ -51,8 +48,9 @@ func _process(_delta) -> void:
 		else:
 			linear_velocity = Vector2.ZERO
 
-func _on_body_entered(body):
-	print("collide")
+func _on_body_entered(body: Node2D) -> void:
 	if body is Atom:
-		if body.index == index:
+		if body.index != index or body.element_name == "neutrino": return
+		
+		if body.shot and shot:
 			body.queue_free()

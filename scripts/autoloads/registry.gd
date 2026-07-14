@@ -6,6 +6,7 @@ var UID: Dictionary = {
 	"title_screen": "uid://dix67ojrdr6ht",
 	"pause_screen": "uid://7jemke30bxqq",
 	
+	"neutrino": "uid://04la61gnsatt",
 	"atom": "uid://gx8cpvdf0wpu",
 	"spring": "uid://kxgfiqp6p2ci"
 }
