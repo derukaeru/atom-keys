@@ -4,28 +4,48 @@ extends Node2D
 @onready var atom_container: Node2D = $atom_pivot/atom_container
 @onready var atoms: Node2D = $atoms
 
-var radius: float = 200.0
+var radius: float = 240.0
 var speed: float = 1.0
 var angle: float = 0.0
+var direction: int = 1
 
+var starting_atoms: int = 3
 enum ATOMS {
 	neutrino,
 	element
 }
-var next_atom_type: ATOMS = ATOMS.neutrino
+var next_atom_type: ATOMS = ATOMS.element
+var can_shoot: bool = true
 
 func _ready() -> void:
+	start()
 	new_atom()
 
 func _process(delta) -> void:
-	angle += delta * speed
+	angle += delta * speed * direction
 	atom_container.global_position = atom_pivot.global_position + Vector2(cos(angle), sin(angle)) * radius
 
 	if not GameManager.game_running: return
 	if Input.is_action_just_pressed("interact"):
 		use_atom()
 
+func start() -> void:
+	for i in range(starting_atoms):
+		var neutrino: Atom = load(Registry.UID.neutrino).instantiate()
+		neutrino.global_position = Vector2(randf_range(0.5, 1.5), randf_range(0.5, 1.5))
+		
+		neutrino.set_collision_layer_value(1, true)
+		neutrino.set_collision_mask_value(1, true)
+		
+		neutrino.atom_center = atom_pivot.global_position
+		neutrino.shot = true
+		
+		atoms.add_child(neutrino)
+
 func use_atom() -> void:
+	if not can_shoot: return
+	can_shoot = false
+	
 	var current_atom: Atom = atom_container.get_child(0)
 	if not current_atom: return
 
@@ -35,8 +55,11 @@ func use_atom() -> void:
 
 	current_atom.set_collision_layer_value(1, true)
 	current_atom.set_collision_mask_value(1, true)
-
+	
+	direction *= -1
+	
 	new_atom()
+	get_tree().create_timer(0.6).timeout.connect(func() -> void: can_shoot = true)
 
 func new_atom() -> void:
 	var atom: Atom
@@ -49,3 +72,5 @@ func new_atom() -> void:
 
 	atom.atom_center = atom_pivot.global_position
 	atom_container.add_child(atom)
+	
+	next_atom_type = ATOMS.values().pick_random()
