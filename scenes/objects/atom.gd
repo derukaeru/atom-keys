@@ -4,6 +4,8 @@ class_name Atom extends RigidBody2D
 @onready var springs_container: Node2D = $springs_container
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
+@onready var label: Label = $Label
+
 @export var element_name: String
 @export var symbol: String
 @export var index: int
@@ -12,14 +14,24 @@ class_name Atom extends RigidBody2D
 @export var radius: float = 32.0
 var springs = []
 
-var speed: float = 270.0
 var atom_center: Vector2
+var speed: float = 240.0
+var color: Color = Color("#ffffff")
+
 var shot: bool = false
 var merging: bool = false
 var colliding: bool = false
-var has_collided: bool = false
+
+@export var data: ElementData
 
 func _ready() -> void:
+	element_name = data.element_name
+	symbol = data.symbol
+	index = data.index
+	
+	radius = data.radius
+	color = data.color
+	
 	var c: Vector2 = position
 	for i in range(vertex_num):
 		var a: float = (2 * PI / vertex_num) * i
@@ -33,6 +45,8 @@ func _ready() -> void:
 		springs.append(s)
 
 	collision.shape.radius = radius
+	label.label_settings.font_color = color
+	label.text = symbol
 
 func _process(_delta) -> void:
 	#var pts: Array = []
@@ -45,38 +59,37 @@ func _process(_delta) -> void:
 	if shot:
 		var to_center: Vector2 = atom_center - global_position
 		if to_center.length() > 6.0:
-			if has_collided:
-				if not colliding: 
-					linear_velocity = to_center.normalized() * speed
-			else: linear_velocity = to_center.normalized() * speed
+			var potential_velocity: Vector2 = to_center.normalized() * speed
+			linear_velocity = potential_velocity if potential_velocity.length() > 0.1 else Vector2.ZERO
 		else:
 			linear_velocity = Vector2.ZERO
+		
+		if linear_velocity.length() > 0.2:
+			var bodies: Array = get_colliding_bodies()
+			for entry in bodies:
+				if entry is Atom:
+					process_atom(entry)
 	else:
 		global_position = get_parent().global_position
-
-func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	var contact_count: int = state.get_contact_count()
-	if contact_count > 0:
-		colliding = true
-	else:
-		colliding = false
-	
-	if not has_collided:
-		has_collided = true
 
 func _on_body_entered(body: Node2D) -> void:
 	if merging: return
 	if body is Atom:
-		if body.index != index or body.element_name == "neutrino": return
-		if body.shot and shot:
-			if get_instance_id() < body.get_instance_id():
-				merging = true
-				body.merging = true
-				body.queue_free()
-				spawn_new_atom()
-				queue_free()
-				
-				return
+		process_atom(body)
+
+func process_atom(atom: Atom):
+	if not atom.shot or not shot: return
+
+	if atom.index != index or atom.element_name == "neutrino": return
+	if get_instance_id() < atom.get_instance_id():
+		merging = true
+		atom.merging = true
+		atom.queue_free()
+		
+		spawn_new_atom()
+		queue_free()
+		
+		return
 
 func spawn_new_atom() -> void:
 	var atom: Atom = load(Registry.UID.atom).instantiate()
@@ -88,6 +101,8 @@ func spawn_new_atom() -> void:
 	
 	atom.set_collision_layer_value(1, true)
 	atom.set_collision_mask_value(1, true)
+	
+	atom.data = AtomManager.get_by_index(atom.index)
 	
 	var container: Node2D = get_tree().get_first_node_in_group("atoms")
 	if not container: return

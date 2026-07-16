@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ElementData" format=3 uid="uid://b17l4bs651s17"]
+
+[ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="1_krigl"]
+
+[resource]
+script = ExtResource("1_krigl")
+element_name = "fluorine"
+symbol = "F"
+index = 8
+metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

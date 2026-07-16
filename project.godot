@@ -22,6 +22,7 @@ GameManager="*uid://cwgisxrlakmuh"
 Registry="*uid://bw4odpmcej1ke"
 SceneChanger="*uid://cxakioj8t26dm"
 Util="*uid://d2rtvpsjo087t"
+AtomManager="*uid://cw8ri553gswii"
 
 [display]
 

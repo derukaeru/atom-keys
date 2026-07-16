@@ -22,11 +22,17 @@ metadata/_custom_type_script = "uid://c1iynraw436cn"
 shape = SubResource("CircleShape2D_nm7s8")
 
 [node name="Label" type="Label" parent="." unique_id=1888718420]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -48.0
 offset_top = -48.0
 offset_right = 48.0
 offset_bottom = 48.0
-text = "H"
+grow_horizontal = 2
+grow_vertical = 2
 label_settings = SubResource("LabelSettings_nm7s8")
 horizontal_alignment = 1
 vertical_alignment = 1

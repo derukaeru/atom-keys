@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ElementData" format=3 uid="uid://b18f87bshewkr"]
+
+[ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="1_fodkg"]
+
+[resource]
+script = ExtResource("1_fodkg")
+element_name = "hydrogen"
+symbol = "H"
+metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

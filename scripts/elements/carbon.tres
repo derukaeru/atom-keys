@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ElementData" format=3 uid="uid://bfcbbtiglcnd2"]
+
+[ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="1_432q8"]
+
+[resource]
+script = ExtResource("1_432q8")
+element_name = "carbon"
+symbol = "C"
+index = 5
+metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

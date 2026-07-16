@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ElementData" format=3 uid="uid://d3pceiwl6rywr"]
+
+[ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="1_4q4yh"]
+
+[resource]
+script = ExtResource("1_4q4yh")
+element_name = "lithium"
+symbol = "Li"
+index = 2
+metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

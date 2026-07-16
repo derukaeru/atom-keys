@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ElementData" format=3 uid="uid://ch6rcapta3im2"]
+
+[ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="1_tjr0k"]
+
+[resource]
+script = ExtResource("1_tjr0k")
+element_name = "helium"
+symbol = "He"
+index = 1
+metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

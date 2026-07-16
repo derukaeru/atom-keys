@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ElementData" format=3 uid="uid://btatxj3e3dfua"]
+
+[ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="1_6a0qj"]
+
+[resource]
+script = ExtResource("1_6a0qj")
+element_name = "chlorine"
+symbol = "Cl"
+index = 16
+metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

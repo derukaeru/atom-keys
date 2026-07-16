@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ElementData" format=3 uid="uid://dl5i1tu4jgh33"]
+
+[ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="1_tlhfi"]
+
+[resource]
+script = ExtResource("1_tlhfi")
+element_name = "vanadium"
+symbol = "V"
+index = 22
+metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

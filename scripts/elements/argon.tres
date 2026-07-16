@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ElementData" format=3 uid="uid://by517drcnnah3"]
+
+[ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="1_xc0ep"]
+
+[resource]
+script = ExtResource("1_xc0ep")
+element_name = "argon"
+symbol = "Ar"
+index = 17
+metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

@@ -16,6 +16,7 @@ enum ATOMS {
 }
 var next_atom_type: ATOMS = ATOMS.element
 var can_shoot: bool = true
+var max_atom_index: int = 3
 
 func _ready() -> void:
 	start()
@@ -59,7 +60,10 @@ func use_atom() -> void:
 	direction *= -1
 	
 	new_atom()
-	get_tree().create_timer(0.6).timeout.connect(func() -> void: can_shoot = true)
+	get_tree().create_timer(0.6).timeout.connect(
+		func() -> void: 
+			can_shoot = true
+	)
 
 func new_atom() -> void:
 	var atom: Atom
@@ -69,8 +73,11 @@ func new_atom() -> void:
 		atom = load(Registry.UID.neutrino).instantiate()
 	else:
 		atom = load(Registry.UID.atom).instantiate()
+		
+		var index: int = randi_range(0, max_atom_index)
+		atom.data = AtomManager.get_by_index(index)
 
 	atom.atom_center = atom_pivot.global_position
 	atom_container.add_child(atom)
 	
-	next_atom_type = ATOMS.values().pick_random()
+	# next_atom_type = ATOMS.values().pick_random()
