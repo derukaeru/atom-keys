@@ -4,6 +4,10 @@ extends Node2D
 @onready var atom_container: Node2D = $atom_pivot/atom_container
 @onready var atoms: Node2D = $atoms
 @onready var line: Line2D = $atom_pivot/Line2D
+@onready var key_sprite: Sprite2D = $key
+
+@onready var next_atom_sprite: Sprite2D = $next_atom
+@onready var next_atom_label: Label = $next_atom/next_atom_label
 
 var radius: float = 240.0
 var speed: float = 1.0
@@ -14,8 +18,11 @@ enum ATOMS {
 	neutrino,
 	element
 }
+
+var next_atom: Atom
 var next_atom_type: ATOMS = ATOMS.element
 var can_shoot: bool = true
+
 
 func _ready() -> void:
 	start()
@@ -28,6 +35,14 @@ func _process(delta) -> void:
 	if not GameManager.game_running: return
 	if Input.is_action_just_pressed("interact"):
 		use_atom()
+	
+	if atoms.get_children().size() >= 32:
+		lose()
+	
+	if Input.is_action_pressed("interact"): 
+		key_sprite.texture = load(Registry.UID["key_pressed"])
+	else:
+		key_sprite.texture = load(Registry.UID["key"])
 
 func start() -> void:
 	for i in range(GameManager.starting_atoms):
@@ -41,6 +56,10 @@ func start() -> void:
 		neutrino.shot = true
 		
 		atoms.add_child(neutrino)
+	GameManager.game_running = true
+
+func lose() -> void:
+	pass
 
 func use_atom() -> void:
 	if not can_shoot: return
@@ -71,12 +90,31 @@ func new_atom() -> void:
 	if next_atom_type == ATOMS.neutrino:
 		atom = load(Registry.UID.neutrino).instantiate()
 	else:
-		atom = load(Registry.UID.atom).instantiate()
-		
-		var index: int = randi_range(0, GameManager.max_atom_index)
-		atom.data = AtomManager.get_by_index(index)
-
+		if not next_atom: 
+			atom = load(Registry.UID.atom).instantiate()
+			
+			var index: int = randi_range(0, GameManager.max_atom_index)
+			atom.data = AtomManager.get_by_index(index)
+		else:
+			atom = next_atom
+			next_atom = null
+	
 	atom.atom_center = atom_pivot.global_position
 	atom_container.add_child(atom)
 	
+	next_atom = load(Registry.UID.atom).instantiate()
+		
+	var nindex: int = randi_range(0, GameManager.max_atom_index)
+	next_atom.data = AtomManager.get_by_index(nindex)
+	
+	var _material: ShaderMaterial = ShaderMaterial.new()
+	_material.shader = load(Registry.UID["color_swap"])
+	
+	_material.set_shader_parameter("target_colors", [Color("732f31")])
+	_material.set_shader_parameter("replace_colors", [next_atom.data.color])
+	_material.set_shader_parameter("tolerance", 0.03)
+	_material.set_shader_parameter("color_count", 1)
+	
+	next_atom_sprite.material = _material
+	next_atom_label.text = next_atom.data.symbol
 	# next_atom_type = ATOMS.values().pick_random()

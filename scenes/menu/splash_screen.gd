@@ -5,4 +5,4 @@ extends Control
 func _ready() -> void:
 	animation.play("fade")
 	await animation.animation_finished
-	SceneChanger.change_scene("title_screen")
+	SceneChanger.change_scene("main")

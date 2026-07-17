@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://bc4qww7g4fufy"]
 
 [ext_resource type="Script" uid="uid://d17iyd044sqs3" path="res://scenes/main/main.gd" id="1_hyk8p"]
+[ext_resource type="Texture2D" uid="uid://cx5hxg0quk5q8" path="res://assets/sprites/key.png" id="2_iuonh"]
+[ext_resource type="Texture2D" uid="uid://dfe360avxnyk2" path="res://assets/sprites/atom.png" id="3_k2fmo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iuonh"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_l3cfh"]
+font_size = 32
 
 [node name="main" type="Node2D" unique_id=2121976591]
 script = ExtResource("1_hyk8p")
@@ -30,3 +38,30 @@ position = Vector2(384, 320)
 
 [node name="atoms" type="Node2D" parent="." unique_id=68321666 groups=["atoms"]]
 position = Vector2(384, 320)
+
+[node name="key" type="Sprite2D" parent="." unique_id=1024861196]
+texture_filter = 1
+position = Vector2(80, 560)
+texture = ExtResource("2_iuonh")
+
+[node name="next_atom_label" type="Label" parent="." unique_id=325332945]
+offset_left = 577.0
+offset_top = 36.0
+offset_right = 721.0
+offset_bottom = 68.0
+text = "Next Atom"
+label_settings = SubResource("LabelSettings_iuonh")
+
+[node name="next_atom" type="Sprite2D" parent="." unique_id=870376440]
+position = Vector2(650, 110)
+texture = ExtResource("3_k2fmo")
+
+[node name="next_atom_label" type="Label" parent="next_atom" unique_id=958983937]
+offset_left = -20.0
+offset_top = -15.0
+offset_right = 20.0
+offset_bottom = 17.0
+text = "H"
+label_settings = SubResource("LabelSettings_l3cfh")
+horizontal_alignment = 1
+vertical_alignment = 1
