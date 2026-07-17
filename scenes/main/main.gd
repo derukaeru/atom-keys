@@ -9,14 +9,12 @@ var speed: float = 1.0
 var angle: float = 0.0
 var direction: int = 1
 
-var starting_atoms: int = 3
 enum ATOMS {
 	neutrino,
 	element
 }
 var next_atom_type: ATOMS = ATOMS.element
 var can_shoot: bool = true
-var max_atom_index: int = 3
 
 func _ready() -> void:
 	start()
@@ -31,17 +29,18 @@ func _process(delta) -> void:
 		use_atom()
 
 func start() -> void:
-	for i in range(starting_atoms):
-		var neutrino: Atom = load(Registry.UID.neutrino).instantiate()
-		neutrino.global_position = Vector2(randf_range(0.5, 1.5), randf_range(0.5, 1.5))
-		
-		neutrino.set_collision_layer_value(1, true)
-		neutrino.set_collision_mask_value(1, true)
-		
-		neutrino.atom_center = atom_pivot.global_position
-		neutrino.shot = true
-		
-		atoms.add_child(neutrino)
+	#for i in range(GameManager.starting_atoms):
+		#var neutrino: Atom = load(Registry.UID.neutrino).instantiate()
+		#neutrino.global_position = Vector2(randf_range(0.5, 1.5), randf_range(0.5, 1.5))
+		#
+		#neutrino.set_collision_layer_value(1, true)
+		#neutrino.set_collision_mask_value(1, true)
+		#
+		#neutrino.atom_center = atom_pivot.global_position
+		#neutrino.shot = true
+		#
+		#atoms.add_child(neutrino)
+	pass
 
 func use_atom() -> void:
 	if not can_shoot: return
@@ -57,7 +56,7 @@ func use_atom() -> void:
 	current_atom.set_collision_layer_value(1, true)
 	current_atom.set_collision_mask_value(1, true)
 	
-	direction *= -1
+	# direction *= -1
 	
 	new_atom()
 	get_tree().create_timer(0.6).timeout.connect(
@@ -74,7 +73,7 @@ func new_atom() -> void:
 	else:
 		atom = load(Registry.UID.atom).instantiate()
 		
-		var index: int = randi_range(0, max_atom_index)
+		var index: int = randi_range(0, GameManager.max_atom_index)
 		atom.data = AtomManager.get_by_index(index)
 
 	atom.atom_center = atom_pivot.global_position

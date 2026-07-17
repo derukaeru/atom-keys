@@ -49,6 +49,12 @@ func _ready() -> void:
 	label.text = symbol
 
 func _process(_delta) -> void:
+	var bodies: Array = get_colliding_bodies()
+	if bodies.size() > 0:
+		for entry in bodies:
+			if entry is Atom:
+				process_atom(entry)
+	
 	#var pts: Array = []
 	#for s in springs:
 		#pts.append(s.position)
@@ -63,14 +69,9 @@ func _process(_delta) -> void:
 			linear_velocity = potential_velocity if potential_velocity.length() > 0.1 else Vector2.ZERO
 		else:
 			linear_velocity = Vector2.ZERO
-		
-		if linear_velocity.length() > 0.2:
-			var bodies: Array = get_colliding_bodies()
-			for entry in bodies:
-				if entry is Atom:
-					process_atom(entry)
 	else:
 		global_position = get_parent().global_position
+	
 
 func _on_body_entered(body: Node2D) -> void:
 	if merging: return
@@ -103,6 +104,9 @@ func spawn_new_atom() -> void:
 	atom.set_collision_mask_value(1, true)
 	
 	atom.data = AtomManager.get_by_index(atom.index)
+	
+	if atom.index > GameManager.max_atom_index:
+		GameManager.max_atom_index += 1
 	
 	var container: Node2D = get_tree().get_first_node_in_group("atoms")
 	if not container: return

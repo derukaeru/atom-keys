@@ -15,6 +15,8 @@ gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_yievg")
+element_name = "neutrino"
+index = -1
 data = SubResource("Resource_r7bgv")
 metadata/_custom_type_script = "uid://c1iynraw436cn"
 

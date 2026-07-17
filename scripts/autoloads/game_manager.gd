@@ -5,6 +5,9 @@ extends Node
 var canvas_layer = CanvasLayer.new()
 var game_running: bool = true
 
+var starting_atoms: int = 3
+var max_atom_index: int = 4
+
 func _ready() -> void:
 	add_child(canvas_layer)
 	canvas_layer.layer = 5
