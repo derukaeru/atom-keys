@@ -2,7 +2,24 @@
 
 [ext_resource type="Script" uid="uid://d17iyd044sqs3" path="res://scenes/main/main.gd" id="1_hyk8p"]
 [ext_resource type="Texture2D" uid="uid://cx5hxg0quk5q8" path="res://assets/sprites/key.png" id="2_iuonh"]
+[ext_resource type="Shader" uid="uid://ddk064ou108ba" path="res://assets/shaders/wave.gdshader" id="2_l3cfh"]
 [ext_resource type="Texture2D" uid="uid://dfe360avxnyk2" path="res://assets/sprites/atom.png" id="3_k2fmo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6q06x"]
+shader = ExtResource("2_l3cfh")
+shader_parameter/polar_coordinates = false
+shader_parameter/polar_center = Vector2(0.5, 0.5)
+shader_parameter/polar_zoom = 1.0
+shader_parameter/polar_repeat = 1.0
+shader_parameter/spin_rotation = 0.0
+shader_parameter/spin_speed = 1.4849999999999999
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.1254902, 0.03137255, 0.08627451, 1)
+shader_parameter/colour_2 = Color(0.14667046, 0.041048713, 0.10327665, 1)
+shader_parameter/colour_3 = Color(0.042864583, 0.0071678353, 0.02389861, 1)
+shader_parameter/contrast = 3.5
+shader_parameter/spin_amount = 0.02
+shader_parameter/pixel_filter = 740.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_iuonh"]
 font_size = 32
@@ -10,16 +27,21 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_l3cfh"]
 font_size = 32
 
+[sub_resource type="LabelSettings" id="LabelSettings_k2fmo"]
+font_size = 32
+font_color = Color(0.9607843, 0.12941177, 0.20392157, 1)
+
 [node name="main" type="Node2D" unique_id=2121976591]
 script = ExtResource("1_hyk8p")
 
-[node name="Control" type="Control" parent="." unique_id=1823130753]
+[node name="background" type="Control" parent="." unique_id=1823130753]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 768.0
 offset_bottom = 648.0
 
-[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1470702390]
+[node name="design" type="ColorRect" parent="background" unique_id=1470702390]
+material = SubResource("ShaderMaterial_6q06x")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +49,6 @@ anchor_bottom = 1.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.1254902, 0.03137255, 0.08627451, 1)
 
 [node name="atom_pivot" type="Node2D" parent="." unique_id=2103493194]
 position = Vector2(384, 320)
@@ -45,15 +66,15 @@ position = Vector2(80, 560)
 texture = ExtResource("2_iuonh")
 
 [node name="next_atom_label" type="Label" parent="." unique_id=325332945]
-offset_left = 577.0
-offset_top = 36.0
-offset_right = 721.0
-offset_bottom = 68.0
+offset_left = 600.0
+offset_top = 24.0
+offset_right = 744.0
+offset_bottom = 56.0
 text = "Next Atom"
 label_settings = SubResource("LabelSettings_iuonh")
 
 [node name="next_atom" type="Sprite2D" parent="." unique_id=870376440]
-position = Vector2(650, 110)
+position = Vector2(673, 98)
 texture = ExtResource("3_k2fmo")
 
 [node name="next_atom_label" type="Label" parent="next_atom" unique_id=958983937]
@@ -63,5 +84,19 @@ offset_right = 20.0
 offset_bottom = 17.0
 text = "H"
 label_settings = SubResource("LabelSettings_l3cfh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="atom_limit_label" type="Label" parent="." unique_id=1612798177]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 280.0
+offset_top = 24.0
+offset_right = 488.0
+offset_bottom = 80.0
+grow_horizontal = 2
+text = "3"
+label_settings = SubResource("LabelSettings_k2fmo")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -8,6 +8,7 @@ extends Node2D
 
 @onready var next_atom_sprite: Sprite2D = $next_atom
 @onready var next_atom_label: Label = $next_atom/next_atom_label
+@onready var atom_limit_label: Label = $atom_limit_label
 
 var radius: float = 240.0
 var speed: float = 1.0

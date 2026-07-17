@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="atom keys"
+config/description="A Suika-style fusion game but instead of stacking fruit, you're colliding elements."
 config/tags=PackedStringArray("ysws")
 run/main_scene="uid://bc4qww7g4fufy"
 config/features=PackedStringArray("4.6", "GL Compatibility")
@@ -29,6 +30,7 @@ AtomManager="*uid://cw8ri553gswii"
 window/size/viewport_width=768
 window/size/viewport_height=640
 window/stretch/mode="viewport"
+window/description=""
 
 [editor_plugins]
 
