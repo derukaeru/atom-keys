@@ -3,6 +3,7 @@ extends Node2D
 @onready var atom_pivot: Node2D = $atom_pivot
 @onready var atom_container: Node2D = $atom_pivot/atom_container
 @onready var atoms: Node2D = $atoms
+@onready var line: Line2D = $atom_pivot/Line2D
 
 var radius: float = 240.0
 var speed: float = 1.0
@@ -29,18 +30,17 @@ func _process(delta) -> void:
 		use_atom()
 
 func start() -> void:
-	#for i in range(GameManager.starting_atoms):
-		#var neutrino: Atom = load(Registry.UID.neutrino).instantiate()
-		#neutrino.global_position = Vector2(randf_range(0.5, 1.5), randf_range(0.5, 1.5))
-		#
-		#neutrino.set_collision_layer_value(1, true)
-		#neutrino.set_collision_mask_value(1, true)
-		#
-		#neutrino.atom_center = atom_pivot.global_position
-		#neutrino.shot = true
-		#
-		#atoms.add_child(neutrino)
-	pass
+	for i in range(GameManager.starting_atoms):
+		var neutrino: Atom = load(Registry.UID.neutrino).instantiate()
+		neutrino.global_position = Vector2(randf_range(0.5, 1.5), randf_range(0.5, 1.5))
+		
+		neutrino.set_collision_layer_value(1, true)
+		neutrino.set_collision_mask_value(1, true)
+		
+		neutrino.atom_center = atom_pivot.global_position
+		neutrino.shot = true
+		
+		atoms.add_child(neutrino)
 
 func use_atom() -> void:
 	if not can_shoot: return

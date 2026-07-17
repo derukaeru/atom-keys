@@ -2,12 +2,23 @@
 
 [ext_resource type="Script" uid="uid://ddl4tg8lo2qhd" path="res://scenes/objects/neutrino.gd" id="1_yievg"]
 [ext_resource type="Script" uid="uid://bbvpu2cv4r58h" path="res://scripts/element_data.gd" id="2_leqe0"]
+[ext_resource type="Shader" uid="uid://dbdge2w2m2isn" path="res://assets/shaders/colorswap.gdshader" id="3_swmwv"]
+[ext_resource type="Texture2D" uid="uid://dfe360avxnyk2" path="res://assets/sprites/atom.png" id="4_ejpld"]
 
 [sub_resource type="Resource" id="Resource_r7bgv"]
 script = ExtResource("2_leqe0")
+color = Color(0.7684995, 0.79593456, 0.4883803, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_leqe0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ntkw"]
+shader = ExtResource("3_swmwv")
+shader_parameter/target_colors = PackedColorArray(0.4509804, 0.18431373, 0.19215687, 1)
+shader_parameter/replace_colors = PackedColorArray(0.5922, 0.63, 0.4788, 1)
+shader_parameter/color_count = 1
+shader_parameter/tolerance = 0.050000002375
+shader_parameter/shader_active = true
 
 [node name="neutrino" type="RigidBody2D" unique_id=24487719]
 mass = 5.0
@@ -20,13 +31,13 @@ index = -1
 data = SubResource("Resource_r7bgv")
 metadata/_custom_type_script = "uid://c1iynraw436cn"
 
-[node name="Line2D" type="Line2D" parent="." unique_id=2063854402]
-
-[node name="springs_container" type="Node2D" parent="." unique_id=954284618]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1144068112]
 shape = SubResource("CircleShape2D_leqe0")
 
 [node name="Label" type="Label" parent="." unique_id=911421013]
 offset_right = 40.0
 offset_bottom = 16.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1368340592]
+material = SubResource("ShaderMaterial_2ntkw")
+texture = ExtResource("4_ejpld")

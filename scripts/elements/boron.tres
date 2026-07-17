@@ -7,4 +7,5 @@ script = ExtResource("1_3lgs6")
 element_name = "boron"
 symbol = "B"
 index = 4
+color = Color(0.28583413, 0.26322123, 0.106967635, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

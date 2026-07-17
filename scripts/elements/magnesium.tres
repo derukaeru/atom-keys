@@ -7,4 +7,5 @@ script = ExtResource("1_8i17m")
 element_name = "magnesium"
 symbol = "Mg"
 index = 11
+color = Color(0.2112, 0.29238003, 0.33, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

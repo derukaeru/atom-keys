@@ -7,4 +7,5 @@ script = ExtResource("1_xc0ep")
 element_name = "argon"
 symbol = "Ar"
 index = 17
+color = Color(0.3563968, 0.115608476, 0.053570174, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

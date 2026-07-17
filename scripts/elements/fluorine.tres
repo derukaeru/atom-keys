@@ -7,4 +7,5 @@ script = ExtResource("1_krigl")
 element_name = "fluorine"
 symbol = "F"
 index = 8
+color = Color(0.35011, 0.24126816, 0.47925502, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

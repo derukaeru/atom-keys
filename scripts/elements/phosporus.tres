@@ -7,4 +7,5 @@ script = ExtResource("1_4111p")
 element_name = "phosporus"
 symbol = "P"
 index = 14
+color = Color(0.38836813, 0.13086218, 0.08213442, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

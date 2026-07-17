@@ -7,4 +7,5 @@ script = ExtResource("1_432q8")
 element_name = "carbon"
 symbol = "C"
 index = 5
+color = Color(0.0124100195, 0.06789892, 0.06909978, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

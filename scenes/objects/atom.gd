@@ -1,8 +1,7 @@
 class_name Atom extends RigidBody2D
 
-@onready var line2d: Line2D = $Line2D
-@onready var springs_container: Node2D = $springs_container
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var sprite: Sprite2D = $Sprite2D
 
 @onready var label: Label = $Label
 
@@ -10,19 +9,20 @@ class_name Atom extends RigidBody2D
 @export var symbol: String
 @export var index: int
 
-@export var vertex_num: int = 16
 @export var radius: float = 32.0
-var springs = []
+@export var data: ElementData
 
 var atom_center: Vector2
-var speed: float = 240.0
+var speed: float = 220.0
+
 var color: Color = Color("#ffffff")
+var target_color: Color = Color("732f31")
 
 var shot: bool = false
 var merging: bool = false
 var colliding: bool = false
 
-@export var data: ElementData
+var explosion_force: float = 900.0
 
 func _ready() -> void:
 	element_name = data.element_name
@@ -31,22 +31,19 @@ func _ready() -> void:
 	
 	radius = data.radius
 	color = data.color
-	
-	var c: Vector2 = position
-	for i in range(vertex_num):
-		var a: float = (2 * PI / vertex_num) * i
-		var x: float = c.x + radius * cos(a)
-		var y: float = c.y + radius * sin(a)
-
-		var s: Spring = load(Registry.UID["spring"]).instantiate()
-		springs_container.add_child(s)
-
-		s.initialize(Vector2(x, y), i, c)
-		springs.append(s)
 
 	collision.shape.radius = radius
-	label.label_settings.font_color = color
 	label.text = symbol
+	
+	var _material: ShaderMaterial = ShaderMaterial.new()
+	_material.shader = load(Registry.UID["color_swap"])
+	
+	_material.set_shader_parameter("target_colors", [target_color])
+	_material.set_shader_parameter("replace_colors", [color])
+	_material.set_shader_parameter("tolerance", 0.03)
+	_material.set_shader_parameter("color_count", 1)
+	
+	sprite.material = _material
 
 func _process(_delta) -> void:
 	var bodies: Array = get_colliding_bodies()
@@ -54,13 +51,6 @@ func _process(_delta) -> void:
 		for entry in bodies:
 			if entry is Atom:
 				process_atom(entry)
-	
-	#var pts: Array = []
-	#for s in springs:
-		#pts.append(s.position)
-	#if pts.size() > 0:
-		#pts.append(pts[0])
-	#line2d.points = pts
 	
 	if shot:
 		var to_center: Vector2 = atom_center - global_position
@@ -72,6 +62,7 @@ func _process(_delta) -> void:
 	else:
 		global_position = get_parent().global_position
 	
+	label.rotation = -rotation
 
 func _on_body_entered(body: Node2D) -> void:
 	if merging: return
@@ -88,6 +79,7 @@ func process_atom(atom: Atom):
 		atom.queue_free()
 		
 		spawn_new_atom()
+		explode()
 		queue_free()
 		
 		return
@@ -112,3 +104,10 @@ func spawn_new_atom() -> void:
 	if not container: return
 	
 	container.call_deferred_thread_group("add_child", atom)
+
+func explode() -> void:
+	for body in get_colliding_bodies():
+		if body is Atom:
+			
+			var dir: Vector2 = body.global_position - global_position
+			body.apply_central_impulse(dir.normalized() * explosion_force)

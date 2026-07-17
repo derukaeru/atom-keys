@@ -7,4 +7,5 @@ script = ExtResource("1_vvt3o")
 element_name = "titanium"
 symbol = "Ti"
 index = 21
+color = Color(0.054950282, 0.22369477, 0.35824397, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

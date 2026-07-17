@@ -7,4 +7,5 @@ script = ExtResource("1_sgm45")
 element_name = "iron"
 symbol = "Fe"
 index = 24
+color = Color(0.187, 0.20955, 0.22, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

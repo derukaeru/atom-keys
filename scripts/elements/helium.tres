@@ -7,4 +7,5 @@ script = ExtResource("1_tjr0k")
 element_name = "helium"
 symbol = "He"
 index = 1
+color = Color(0.42529565, 0.22199833, 0.2039277, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

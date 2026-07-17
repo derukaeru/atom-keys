@@ -26,5 +26,7 @@ position = Vector2(384, 320)
 
 [node name="atom_container" type="Node2D" parent="atom_pivot" unique_id=1307724853]
 
+[node name="Line2D" type="Line2D" parent="atom_pivot" unique_id=1730410241]
+
 [node name="atoms" type="Node2D" parent="." unique_id=68321666 groups=["atoms"]]
 position = Vector2(384, 320)

@@ -7,4 +7,5 @@ script = ExtResource("1_4q4yh")
 element_name = "lithium"
 symbol = "Li"
 index = 2
+color = Color(0.17108941, 0.33696643, 0.28695214, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

@@ -7,4 +7,5 @@ script = ExtResource("1_tlhfi")
 element_name = "vanadium"
 symbol = "V"
 index = 22
+color = Color(0.2813265, 0.117804326, 0.4312858, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

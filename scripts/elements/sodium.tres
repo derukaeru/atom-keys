@@ -7,4 +7,5 @@ script = ExtResource("1_rhgk1")
 element_name = "sodium"
 symbol = "Na"
 index = 10
+color = Color(0.43745613, 0.3820068, 0.09725628, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

@@ -6,4 +6,5 @@
 script = ExtResource("1_fodkg")
 element_name = "hydrogen"
 symbol = "H"
+color = Color(0.15821016, 0.334526, 0.4183505, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

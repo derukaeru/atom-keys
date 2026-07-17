@@ -7,4 +7,5 @@ script = ExtResource("1_vewx8")
 element_name = "nitrogen"
 symbol = "N"
 index = 6
+color = Color(0.28430766, 0.3490405, 0.52091956, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

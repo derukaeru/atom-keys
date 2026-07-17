@@ -7,4 +7,5 @@ script = ExtResource("1_ddmd3")
 element_name = "silicon"
 symbol = "Si"
 index = 13
+color = Color(0.2, 0.23416667, 0.25, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

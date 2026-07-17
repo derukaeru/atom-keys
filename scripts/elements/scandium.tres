@@ -7,4 +7,5 @@ script = ExtResource("1_bv57x")
 element_name = "scandium"
 symbol = "Sc"
 index = 20
+color = Color(0.3158288, 0.13034636, 0.15655217, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

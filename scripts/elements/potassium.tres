@@ -7,4 +7,5 @@ script = ExtResource("1_digbj")
 element_name = "potassium"
 symbol = "K"
 index = 18
+color = Color(0.31766164, 0.09048634, 0.15726188, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"

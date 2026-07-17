@@ -7,4 +7,5 @@ script = ExtResource("1_5tlij")
 element_name = "calcium"
 symbol = "Ca"
 index = 19
+color = Color(0.09727853, 0.23869312, 0.24073192, 1)
 metadata/_custom_type_script = "uid://bbvpu2cv4r58h"
