@@ -75,6 +75,8 @@ func _on_body_entered(body: Node2D) -> void:
 		process_atom(body)
 
 func process_atom(atom: Atom):
+	# atom is iron
+	if index == 25: return
 	if not atom.shot or not shot or atom.merging: return
 
 	if atom.index != index or atom.element_name == "neutrino": return
@@ -123,4 +125,3 @@ func disappear() -> void:
 	await animation.animation_finished
 	GameManager.atoms_changed.emit()
 	queue_free()
-	

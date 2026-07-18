@@ -32,6 +32,12 @@ font_size = 32
 font_size = 32
 font_color = Color(0.9103995, 0.3482827, 0.3183874, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_6q06x"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ow5a4"]
+font_size = 32
+
 [node name="main" type="Node2D" unique_id=2121976591]
 script = ExtResource("1_hyk8p")
 
@@ -66,7 +72,7 @@ script = ExtResource("3_6q06x")
 
 [node name="key" type="Sprite2D" parent="." unique_id=1024861196]
 texture_filter = 1
-position = Vector2(97, 556)
+position = Vector2(80, 560)
 texture = ExtResource("2_iuonh")
 
 [node name="next_atom_label" type="Label" parent="." unique_id=325332945]
@@ -103,5 +109,35 @@ offset_bottom = 80.0
 grow_horizontal = 2
 text = "3"
 label_settings = SubResource("LabelSettings_k2fmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="restart_label" type="Label" parent="." unique_id=1681176806]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 240.0
+offset_top = 584.0
+offset_right = 560.0
+offset_bottom = 616.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "press space to restart"
+label_settings = SubResource("LabelSettings_6q06x")
+
+[node name="start_label" type="Label" parent="." unique_id=210715555]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 240.0
+offset_top = 576.0
+offset_right = 528.0
+offset_bottom = 608.0
+grow_horizontal = 2
+text = "press space to start"
+label_settings = SubResource("LabelSettings_ow5a4")
 horizontal_alignment = 1
 vertical_alignment = 1

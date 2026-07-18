@@ -13,7 +13,7 @@ config_version=5
 config/name="atom keys"
 config/description="A Suika-style fusion game but instead of stacking fruit, you're colliding elements."
 config/tags=PackedStringArray("ysws")
-run/main_scene="uid://bc4qww7g4fufy"
+run/main_scene="uid://b4ggbq71lpwo4"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

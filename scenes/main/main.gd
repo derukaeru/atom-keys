@@ -10,11 +10,14 @@ extends Node2D
 @onready var next_atom_sprite: Sprite2D = $next_atom
 @onready var next_atom_label: Label = $next_atom/next_atom_label
 @onready var atom_limit_label: Label = $atom_limit_label
+@onready var restart_label: Label = $restart_label
+@onready var start_label: Label = $start_label
 
 var radius: float = 240.0
 var speed: float = 1.0
 var angle: float = 0.0
 var direction: int = 1
+var started: bool = false
 
 enum ATOMS {
 	neutrino,
@@ -37,6 +40,10 @@ func _process(delta) -> void:
 	atom_container.global_position = atom_pivot.global_position + Vector2(cos(angle), sin(angle)) * radius
 
 	if Input.is_action_pressed("interact"): 
+		if not started:
+			started = true
+			start_label.hide()
+		
 		key_sprite.texture = load(Registry.UID["key_pressed"])
 	else:
 		key_sprite.texture = load(Registry.UID["key"])
@@ -46,7 +53,6 @@ func _process(delta) -> void:
 	if not GameManager.game_running: 
 		if Input.is_action_just_pressed("interact"):
 			restart()
-		
 		return
 	
 	if Input.is_action_just_pressed("interact"):
@@ -79,9 +85,13 @@ func restart() -> void:
 	await get_tree().create_timer(atom_limit * 0.06).timeout
 	GameManager.game_running = true
 	GameManager.atoms_changed.emit()
+	
+	restart_label.hide()
+	atom_limit_label.hide()
 
 func lose() -> void:
 	GameManager.game_running = false
+	restart_label.show()
 
 func use_atom() -> void:
 	if not can_shoot: return
