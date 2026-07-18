@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @onready var atom_pivot: Node2D = $atom_pivot
 @onready var atom_container: Node2D = $atom_pivot/atom_container
 @onready var atoms: Node2D = $atoms
@@ -23,9 +24,11 @@ enum ATOMS {
 var next_atom: Atom
 var next_atom_type: ATOMS = ATOMS.element
 var can_shoot: bool = true
-
+var atom_limit: int = 32
 
 func _ready() -> void:
+	GameManager.atoms_changed.connect(new_atom_addition)
+	
 	start()
 	new_atom()
 
@@ -33,17 +36,24 @@ func _process(delta) -> void:
 	angle += delta * speed * direction
 	atom_container.global_position = atom_pivot.global_position + Vector2(cos(angle), sin(angle)) * radius
 
-	if not GameManager.game_running: return
-	if Input.is_action_just_pressed("interact"):
-		use_atom()
-	
-	if atoms.get_children().size() >= 32:
-		lose()
-	
 	if Input.is_action_pressed("interact"): 
 		key_sprite.texture = load(Registry.UID["key_pressed"])
 	else:
 		key_sprite.texture = load(Registry.UID["key"])
+	
+	line.points = [Vector2.ZERO, atom_container.position]
+	
+	if not GameManager.game_running: 
+		if Input.is_action_just_pressed("interact"):
+			restart()
+		
+		return
+	
+	if Input.is_action_just_pressed("interact"):
+		use_atom()
+	
+	if atoms.get_children().size() >= atom_limit:
+		lose()
 
 func start() -> void:
 	for i in range(GameManager.starting_atoms):
@@ -59,8 +69,19 @@ func start() -> void:
 		atoms.add_child(neutrino)
 	GameManager.game_running = true
 
+func restart() -> void:
+	var _atoms = atoms.get_children()
+	for i in range(_atoms.size()):
+		var atom = _atoms[i]
+		if atom is Atom:
+			get_tree().create_timer(i * 0.05).timeout.connect(atom.disappear)
+	
+	await get_tree().create_timer(atom_limit * 0.06).timeout
+	GameManager.game_running = true
+	GameManager.atoms_changed.emit()
+
 func lose() -> void:
-	pass
+	GameManager.game_running = false
 
 func use_atom() -> void:
 	if not can_shoot: return
@@ -79,7 +100,7 @@ func use_atom() -> void:
 	# direction *= -1
 	
 	new_atom()
-	get_tree().create_timer(0.6).timeout.connect(
+	get_tree().create_timer(0.3).timeout.connect(
 		func() -> void: 
 			can_shoot = true
 	)
@@ -118,4 +139,15 @@ func new_atom() -> void:
 	
 	next_atom_sprite.material = _material
 	next_atom_label.text = next_atom.data.symbol
+	
+	GameManager.atoms_changed.emit()
 	# next_atom_type = ATOMS.values().pick_random()
+
+func new_atom_addition() -> void:
+	var atoms_left = 32 - atoms.get_children().size()
+	if atoms_left <= 3:
+		atom_limit_label.text = str(atoms_left) + " atoms left"
+		atom_limit_label.show()
+	else:
+		atom_limit_label.hide()
+		atom_limit_label.text = ""

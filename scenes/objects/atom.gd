@@ -1,9 +1,10 @@
 class_name Atom extends RigidBody2D
 
+@onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
 
-@onready var label: Label = $Label
+@onready var label: Label = $Sprite2D/Label
 
 @export var element_name: String
 @export var symbol: String
@@ -23,6 +24,7 @@ var merging: bool = false
 var colliding: bool = false
 
 var explosion_force: float = 900.0
+var can_merge: bool = false
 
 func _ready() -> void:
 	element_name = data.element_name
@@ -44,6 +46,9 @@ func _ready() -> void:
 	_material.set_shader_parameter("color_count", 1)
 	
 	sprite.material = _material
+	
+	animation.play("spawn")
+	
 
 func _process(_delta) -> void:
 	var bodies: Array = get_colliding_bodies()
@@ -70,16 +75,16 @@ func _on_body_entered(body: Node2D) -> void:
 		process_atom(body)
 
 func process_atom(atom: Atom):
-	if not atom.shot or not shot: return
+	if not atom.shot or not shot or atom.merging: return
 
 	if atom.index != index or atom.element_name == "neutrino": return
-	if get_instance_id() < atom.get_instance_id():
+	if get_instance_id() > atom.get_instance_id():
 		merging = true
 		atom.merging = true
 		atom.queue_free()
 		
+		atom.disappear()
 		spawn_new_atom()
-		explode()
 		queue_free()
 		
 		return
@@ -104,6 +109,7 @@ func spawn_new_atom() -> void:
 	if not container: return
 	
 	container.call_deferred_thread_group("add_child", atom)
+	GameManager.atoms_changed.emit()
 
 func explode() -> void:
 	for body in get_colliding_bodies():
@@ -111,3 +117,10 @@ func explode() -> void:
 			
 			var dir: Vector2 = body.global_position - global_position
 			body.apply_central_impulse(dir.normalized() * explosion_force)
+
+func disappear() -> void:
+	animation.play("disappear")
+	await animation.animation_finished
+	GameManager.atoms_changed.emit()
+	queue_free()
+	
