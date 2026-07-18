@@ -10,5 +10,7 @@ var UID: Dictionary = {
 	
 	"color_swap": "uid://dbdge2w2m2isn",
 	"key": "uid://cx5hxg0quk5q8",
-	"key_pressed": "uid://fbfrajg0ems8"
+	"key_pressed": "uid://fbfrajg0ems8",
+	
+	"atoms_data_dictionary": "uid://b3phnikr40gvp"
 }

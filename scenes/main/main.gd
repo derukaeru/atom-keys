@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @onready var atom_pivot: Node2D = $atom_pivot
 @onready var atom_container: Node2D = $atom_pivot/atom_container
 @onready var atoms: Node2D = $atoms
